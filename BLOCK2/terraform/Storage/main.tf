@@ -39,7 +39,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket_lifecycle" {
     id     = "Archiving"
     status = "Enabled"
     transition {
-      days          = 360
+      days          = 365
       storage_class = "GLACIER"
     }
 
