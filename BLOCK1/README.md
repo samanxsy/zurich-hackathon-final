@@ -11,7 +11,7 @@ Create and develop infrastructure using an IaC, only Terraform or Cloud Formatio
 
 2. created a subnet from the original subnet, with a plan to be able to create more subnets in the future if needed. That's the reason behind choosing [10.1.1.0/24] CIDR block.
 
-3. created a security group to define the inbound traffic rules. Allowed HTTPS connection by opening 443, as well as 1337, and 3035. Also, opened port 22 to allow SSH connection to the instances, but Limited the IP address to the address of the machine that created the infrastructure. So nobody else will not be able to connect and modify the servers. (Of course, choosing a defined range would be a more practical option, for example when multiple people are allowed to modify the servers remotely)
+3. created a security group to define the inbound traffic rules. Allowed HTTPS connection by opening 443, as well as 1337, and 3035. Also, opened port 22 to allow SSH connection to the instances, but Limited the IP address to the address of the machine that created the infrastructure. So nobody else will not be able to connect and modify the servers. To achieve that, I wrote a shell script that fetches the current public IP of the device creating the infrastructure. Of course, choosing a defined range instead of one specific public IP is a more practical option, But I kept it tight due to not having a defined range.
 
 4. Then Created an Internet Gateway to allow Internet connection to the subnets. Altho it was not mentioned whether the services that are going to be hosted by our instances will be public or not, The SSH connection definitely needed public internet access. So I created an Internet GateWay
 
