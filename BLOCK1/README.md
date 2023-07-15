@@ -34,3 +34,8 @@ ssh <path-to-private-key> ubuntu@<ec2-publicIp>
 Due to panic time, I configured a CI pipeline in GitHub actions while we were in the Zurich office. However, I tried to bring the same pipeline functionality to a groovy syntax as well and tried it in a Jenkins running on docker, in an Azure VM, to be able to use an actual Payload URL.
 
 For the security of the infrastructure, I've adopted **Snyk**, and it constantly monitors the code as I write it, as well as being integrated with my git repositories to scan the code base as it ages over time to be notified about the new vulnerabilities.
+
+
+### Infrastructure Diagram
+![block1 drawio](https://github.com/samanxsy/zurich-hackathon-final/assets/118216325/a1277b48-770c-4e9b-a478-d8b3cf4a54e8)
+
