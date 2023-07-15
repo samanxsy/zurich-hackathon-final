@@ -3,5 +3,5 @@
 *.tfstate.*
 *.json
 *.terraform*
-*instance-A*
-*instance-B*
+*instance-A
+*instance-B
