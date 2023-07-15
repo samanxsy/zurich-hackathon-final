@@ -37,15 +37,16 @@ In this architecture, choosing S3 as web server is again a more cost-effectieve 
 
 # Design and Diagram
 The serverless solution I designed for this problem, is planned to work as below:  
-1. The client (Users) send a request to the application domain (**Route53**)
-2. The Content Delivery serivce (**CloudFront**) caches the website data (static files hosted by S3) in a location close to user
-3. The cloudfront responses with the web app frontend
-4. User interacts with the application, and the requests are sent to API GateWay
-5. API GateWay sends the request to the Lambda Functions that have apporpriate RBAC rules attached to them.
+1. The client (Users) approaches to the application domain (**Route53**)
+2. **Route53** will send back the address of the static website hosting on S3, while C
+3. The websites will render in the browser
+4. The Static Website uses JavaScript to make the API calls.
+5. The API Calls will hit the API GateWay and the gateway trigger the Lambda Functions that have apporpriate RBAC rules attached to them.
 6. Lambda functions interact with the DynamoDB to return customer data, or insert photos of the damaged cars into our Highly Scalable S3 Bucket.
 7. The reponses from the lambda functions are then returned to the Client through the GateWayt
 
-**Note**: Number of lambda functions in the Diagram is not fixed, and can be changed depending on the backend logic requirements
+**Note 1**: Number of lambda functions in the Diagram is not fixed, and can be changed depending on the backend logic requirements
+**Note 2**: The CloudFront, the Contend Delivery service of the aws, caches the webapp frontend close to the end users, helping it faster to load
 
 ![finaldraw drawio](https://github.com/samanxsy/zurich-hackathon-final/assets/118216325/a937c0be-fa91-4439-b287-85346efab5d0)
 - **White solid line** represents the Client Request
