@@ -31,7 +31,7 @@ ssh <path-to-private-key> ubuntu@<ec2-publicIp>
 
 
 #### CI/CD & Jenkins
-Due to panic time, I configured a CI pipeline in GitHub actions while we were in the Zurich office. However, I tried to bring the same pipeline functionality to a groovy syntax as well and tried it in a Jenkins running on docker, in an Azure VM, to be able to use an actual Payload URL.
+Due to panic time, I configured a CI pipeline in GitHub actions while we were in the Zurich office. The pipeline gets triggered by any change pushed to the master branch and starts running some basic formatting and tests, and eventually applies the infrastructure. Changes to the README file do not trigger the workflow. Also, I tried to bring the same pipeline functionality to a groovy syntax as well and tried it in a Jenkins running on docker, in an Azure VM, to be able to use an actual Payload URL.
 
 For the security of the infrastructure, I've adopted **Snyk**, and it constantly monitors the code as I write it, as well as being integrated with my git repositories to scan the code base as it ages over time to be notified about the new vulnerabilities.
 
