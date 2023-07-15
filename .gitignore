@@ -1,0 +1,7 @@
+*.tfstate
+*.tfstate.backup
+*.tfstate.*
+*.json
+*.terraform*
+*instance-A*
+*instance-B*
