@@ -16,7 +16,7 @@ resource "aws_instance" "instance_a" {
   # associate_public_ip_address = true
 
   root_block_device {
-    volume_size = 50
+    volume_size = 20
     encrypted = true
   }
 
@@ -64,6 +64,3 @@ resource "aws_instance" "instance_b" {
     Name  = "instance-B"
   }
 }
-
-
-#  AUTO SCALING CONFIGS
