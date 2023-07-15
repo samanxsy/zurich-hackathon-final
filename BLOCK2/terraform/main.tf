@@ -7,7 +7,7 @@ terraform {
     bucket         = "statebucketx"
     key            = "finalphaste/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "tf-state-lock"
+    dynamodb_table = "tf-state-lock" # TO REJECT SIMULTANEOUS INFRASTRUCTURE PROVISIONING BY A TEAM
     encrypt        = true
   }
 

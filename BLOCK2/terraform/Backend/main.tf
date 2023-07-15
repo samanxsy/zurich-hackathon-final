@@ -11,7 +11,7 @@ resource "aws_lambda_function" "zurich_lambda_function" {
   memory_size   = 128
 
   # Lambda Code Path
-  filename = "Backend/lambda_function.zip"
+  filename = "Backend/lambda_function.zip" # FOR THE FUNCTION CODE. Unfortunately could not find the time code the functions
 
   tracing_config {
     mode = "Active"
@@ -70,18 +70,24 @@ resource "aws_lambda_permission" "allow_api_gateway" {
   source_arn    = aws_api_gateway_rest_api.webapp_gateway.arn
 }
 
-# API GATE WAY
+
+################################################
+################ API GATE WAY ##################
+
+# RESTFUL API
 resource "aws_api_gateway_rest_api" "webapp_gateway" {
   name        = "WebApp-API-GateWay"
   description = "Web app API GateWay to Lambda functions"
 }
 
+# API GATE WAY RESOURCE
 resource "aws_api_gateway_resource" "gateway_resource" {
   rest_api_id = aws_api_gateway_rest_api.webapp_gateway.id
   parent_id   = aws_api_gateway_rest_api.webapp_gateway.root_resource_id
-  path_part   = "examplepath"
-}
+  path_part   = "photos"
+} # MORE & NESTED RESOURCE COULD BE ADDED
 
+# METHODS
 resource "aws_api_gateway_method" "webapp_method" {
   rest_api_id   = aws_api_gateway_rest_api.webapp_gateway.id
   resource_id   = aws_api_gateway_resource.gateway_resource.id
@@ -89,6 +95,7 @@ resource "aws_api_gateway_method" "webapp_method" {
   authorization = "AWS_IAM"
 }
 
+# Integrating API GateWay with Lambda
 resource "aws_api_gateway_integration" "gateway_integration" {
   rest_api_id             = aws_api_gateway_rest_api.webapp_gateway.id
   resource_id             = aws_api_gateway_resource.gateway_resource.id
@@ -98,8 +105,15 @@ resource "aws_api_gateway_integration" "gateway_integration" {
   uri                     = aws_lambda_function.zurich_lambda_function.invoke_arn
 }
 
+# Deployment
+resource "aws_api_gateway_deployment" "webapp_deployment" {
+  rest_api_id = aws_api_gateway_rest_api.webapp_gateway.id
+  stage_name  = "zurich-webapp-stage"
+}
+
+# Stage
 resource "aws_api_gateway_stage" "gateway_stage" {
   rest_api_id   = aws_api_gateway_rest_api.webapp_gateway.id
   stage_name    = "zurich-webapp-stage"
-  deployment_id = ""
+  deployment_id = aws_api_gateway_deployment.webapp_deployment.execution_arn
 }
