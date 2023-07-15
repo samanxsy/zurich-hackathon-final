@@ -4,7 +4,7 @@
 being able to efficiently scale a WebApp for uploading images into an S3 AWS bucket
 
 ### Solution
-To create a scalable solution for a web application as well as a scalable answer to storing photos, I decided to design a 3-tier Serverless web app. The reason behind going serverless was to be able to provision the resources that are Highly available and Highly scalable by design, and have a more cost-effecitve approach. The solution includes:
+To create a scalable solution for a web application as well as a scalable answer to storing photos, I decided to design a 3-tier Serverless web app. The reason behind going serverless was to be able to provision the resources that are Highly available and Highly scalable by design and have a more cost-effective approach. The solution includes:
 
 - **Frontend & Content Access**
     - S3 Bucket for Hosting the static (HTML, CSS, JS) files, and serving as the Frontend
@@ -30,23 +30,23 @@ I set the rules to move the photos to **S3 Glacier** after a year and eventually
 - **Server Side Encryption**: By enabling serverside encryption, we can protect our data at rest. The encryption uses an AWS-managed service for storing the encryption keys. The key rotation also has been enabled to change the keys once in a period, to enhance security
 
 ### Why Lambda over EC2 instances
-Lambda functions can scale automatically in response to high traffic. It's not only about scalibility, Lambda functions are more cost-efficient too. Instead of having EC2 servers constantly up and running, With Lambda we only pay for the compute time.  
+Lambda functions can scale automatically in response to high traffic. It's not only about scalability, Lambda functions are more cost-efficient too. Instead of having EC2 servers constantly up and running, With Lambda we only pay for the compute time.  
 
 ### Why S3 as webserver
-In this architecture, choosing S3 as web server is again a more cost-effectieve approach. It removes the overhead for provisioning Network, as well as the need to create EC2 instances to run webserver on them.
+In this architecture, choosing S3 as the web server is again a more cost-effective approach. It removes the overhead for provisioning the Network, as well as the need to create EC2 instances to run web servers on them.
 
 # Design and Diagram
 The serverless solution I designed for this problem, is planned to work as below:  
-1. The client (Users) approaches to the application domain (**Route53**)
+1. The client (Users) approaches the application domain (**Route53**)
 2. **Route53** will send back the address of the static website hosting on S3, while C
 3. The websites will render in the browser
 4. The Static Website uses JavaScript to make the API calls.
-5. The API Calls will hit the API GateWay and the gateway trigger the Lambda Functions that have apporpriate RBAC rules attached to them.
-6. Lambda functions interact with the DynamoDB to return customer data, or insert photos of the damaged cars into our Highly Scalable S3 Bucket.
-7. The reponses from the lambda functions are then returned to the Client through the GateWayt
+5. The API Calls will hit the API Gateway and the gateway trigger the Lambda Functions that have appropriate RBAC rules attached to them.
+6. Lambda functions to interact with the DynamoDB to return customer data or insert photos of the damaged cars into our Highly Scalable S3 Bucket.
+7. The responses from the lambda functions are then returned to the Client through the GateWayt
 
-**Note 1**: Number of lambda functions in the Diagram is not fixed, and can be changed depending on the backend logic requirements
-**Note 2**: The CloudFront, the Contend Delivery service of the aws, caches the webapp frontend close to the end users, helping it faster to load
+**Note 1**: The number of lambda functions in the Diagram is not fixed, and can be changed depending on the backend logic requirements
+**Note 2**: The CloudFront, the Content Delivery service of the aws, caches the web app frontend close to the end users, helping it faster to load
 
 ![finaldraw drawio](https://github.com/samanxsy/zurich-hackathon-final/assets/118216325/a937c0be-fa91-4439-b287-85346efab5d0)
 - **White solid line** represents the Client Request
