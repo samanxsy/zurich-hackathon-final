@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+    
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/your/repo.git'
+            }
+        }
+        
+        stage('Terraform') {
+            environment {
+                TF_VERSION = '1.5.2'
+                TF_WORKING_DIR = 'BLOCK1/terraform'
+            }
+            
+            steps {
+                script {
+                    withCredentials([string(credentialsId: 'AWS_ACCESS_KEY_ID', variable: 'AWS_ACCESS_KEY_ID'),
+                                     string(credentialsId: 'AWS_SECRET_ACCESS_KEY', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                        
+                        sh 'terraform fmt -recursive ${TF_WORKING_DIR}'
+                        sh 'terraform init ${TF_WORKING_DIR}'
+                        sh 'terraform plan ${TF_WORKING_DIR}'
+                        sh 'terraform apply -auto-approve ${TF_WORKING_DIR}'
+                    }
+                }
+            }
+        }
+    }
+}

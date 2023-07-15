@@ -22,9 +22,15 @@ Create and develop an infrastucture using an IaC, only Terraform or Cloud Format
 
 2. The Size and image type could be decided appropriately considering the future workloads require a **compute optimized** solution, **storage optimized** solution, or **graphic optimized**. I went with the minimum AMI to simplify and fasten my process for the purpose of this Hackathon.
 
-3. For each instance, I declared the path to their respective private keys. (Not pushed to the repo because it just feels bad, even the public key hurts).
+3. For each instance, I declared the path to their respective private keys. I didn't pushed the private keys to the repo, neither intended to push the public key, but had to do that keys to test my GitHub Actions quickly).
 
 4. When provisioned, the connection to instances can happen by running the command below:
 ```
 ssh <path-to-private-key> ubuntu@<ec2-publicIp>
 ```
+
+
+#### CI/CD & Jenkins
+Due to panic of time, I configured a CI pipeline in GitHub actions while we were in Zurich office. However, I tried to bring the same pipeline functionality to a groovy syntax as well, and tried it in a Jenkins running on docker, in an Azure VM, to be able to use an actual Payload URL.
+
+For security of the infrastructure, I've adopted **Snyk**, and it constantly monitures the code as I write it, as well as being integrated with my git repositories to scan the code base as it ages over time to be notified about the new vulnerabilities.
