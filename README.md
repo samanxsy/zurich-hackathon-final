@@ -7,7 +7,7 @@ It was an INCREDIBLE experience for me. I can not put my feelings into words. It
 
 
 ### Solutions
-I divided the solutions and they can be found in BLOCK1 & BLOCK2 Directories. Also, the **README** files for each Block are placed in their respective directories
+I divided the solutions and they can be found in `BLOCK1/` & `BLOCK2/` Directories. Also, the **README** files for each Block are placed in their respective directories
 
 ### on CI/CD
 During the competition, I provisioned a CI pipeline in GitHub Action that performs basic formatting and runs a terraform plan to check for bugs, and potential infrastructure changes, due to the infrastructure complexity, I commented out the `terraform apply` step. For Jenkis, I tried to clone the same functionality of my GitHub Action pipeline and turn it into Groovy syntax. The Jenkins code can be found in the `BLOCK1/Jenkins/Jenkinsfile`
