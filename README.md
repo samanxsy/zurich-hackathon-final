@@ -3,7 +3,7 @@
 
 
 # THANK YOU SO MUCH ❤️
-It was an INCREDIBLE experience for me. I can not put my feelings into words. It was A great pleasure and honor to be among the finalists and to meet everyone from Zurich & NUWE. It meant A LOT To me.
+It was an INCREDIBLE experience for me. I can not put my feelings into words. It was a great pleasure and honor to be among the finalists and to meet everyone from Zurich & NUWE. It meant A LOT To me.
 
 
 ### Solutions
