@@ -61,6 +61,15 @@ resource "aws_iam_policy_attachment" "lambda_DynamoDB_role" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
 }
 
+# Allow lambda to be invoked by API GATE WAY
+resource "aws_lambda_permission" "allow_api_gateway" {
+  statement_id = "AllowAPIGatewayInvoke"
+  action = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.zurich_lambda_function.function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = aws_api_gateway_rest_api.webapp_gateway.arn
+}
+
 # API GATE WAY
 resource "aws_api_gateway_rest_api" "webapp_gateway" {
   name        = "WebApp-API-GateWay"

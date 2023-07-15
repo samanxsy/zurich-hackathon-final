@@ -1,0 +1,37 @@
+name: Terraform CI
+on:
+  push:
+    paths-ignore:
+      - '**/README.md'
+    branches:
+      - master
+
+jobs:
+  terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    defaults:
+      run:
+        working-directory: terraform
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Terraform SetUp
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.5.2
+          terraform_wrapper: false
+
+      - name: Formating terraform code
+        run: terraform fmt -recursive
+
+      - name: Initializing Backend
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan
