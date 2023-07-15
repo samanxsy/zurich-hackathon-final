@@ -37,15 +37,15 @@ resource "aws_security_group" "zurich_sg" {
     description = "Security group for EC2 instances"
 
     ingress {
-        description = "Allowing port 443 from ANY SOURCE"
+        description = "Allowing port HTTPS Connection from public internet"
         from_port = 443
         to_port = 443
         protocol = "tcp"
-        cidr_blocks = [var.default_vpc_cidr]
+        cidr_blocks = ["0.0.0.0/0"]
     }
 
     ingress {
-        description = "Allowing port 1337 from ANY SOURCE"
+        description = "Allowing port 1337 from a limited range"
         from_port = 1337
         to_port = 1337
         protocol = "tcp"
@@ -53,7 +53,7 @@ resource "aws_security_group" "zurich_sg" {
     }
 
     ingress {
-        description = "Allowing port 3035 from ANY SOURCE"
+        description = "Allowing port 3035 from a limited range (TCP)"
         from_port = 3035
         to_port = 3035
         protocol = "tcp"
@@ -61,7 +61,7 @@ resource "aws_security_group" "zurich_sg" {
     }
 
     ingress {
-        description = "Allowing port Communication via 3035"
+        description = "Allowing port 3035 from a limited range (UDP)"
         from_port = 3035
         to_port = 3035
         protocol = "udp"
@@ -69,7 +69,7 @@ resource "aws_security_group" "zurich_sg" {
     }
 
     ingress {
-        description = "Allowing SSH Connection"
+        description = "Allowing SSH Connection from infrastructure provisioner IP"
         from_port = 22
         to_port = 22
         protocol = "tcp"

@@ -13,7 +13,7 @@ resource "aws_instance" "instance_a" {
   availability_zone           = var.zurich_instance_azs
   subnet_id                   = var.zurich_subnet_id
   security_groups = [var.zurich_security_group]
-  # associate_public_ip_address = true
+  associate_public_ip_address = true
 
   root_block_device {
     volume_size = 20
@@ -45,7 +45,7 @@ resource "aws_instance" "instance_b" {
   availability_zone           = var.zurich_instance_azs
   subnet_id                   = var.zurich_subnet_id
   security_groups = [var.zurich_security_group]
-  # associate_public_ip_address = true
+  associate_public_ip_address = true
 
   root_block_device {
     volume_size = 50
