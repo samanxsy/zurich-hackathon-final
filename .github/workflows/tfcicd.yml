@@ -15,7 +15,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     defaults:
       run:
-        working-directory: terraform
+        working-directory: BLOCK1/terraform
 
     steps:
       - name: Checkout
