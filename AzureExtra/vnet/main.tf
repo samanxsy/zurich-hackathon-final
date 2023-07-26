@@ -51,7 +51,7 @@ resource "azurerm_network_security_rule" "vx_security_rules_HTTP" {
   protocol                    = "Tcp"
   source_port_range           = "*"
   destination_port_range      = "8080"
-  source_address_prefix       = data.external.my_public_ip.result["my_public_ip"]
+  source_address_prefix       = "*"
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.vx_vm_rg.name
   network_security_group_name = azurerm_network_security_group.vx_sg.name
